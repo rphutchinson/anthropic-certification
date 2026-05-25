@@ -1,0 +1,267 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Prompt Evaluation Report</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 20px;
+                color: #333;
+            }
+            .header {
+                background-color: #f0f0f0;
+                padding: 20px;
+                border-radius: 5px;
+                margin-bottom: 20px;
+            }
+            .summary-stats {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .stat-box {
+                background-color: #fff;
+                border-radius: 5px;
+                padding: 15px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                flex-basis: 30%;
+                min-width: 200px;
+            }
+            .stat-value {
+                font-size: 24px;
+                font-weight: bold;
+                margin-top: 5px;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+            th {
+                background-color: #4a4a4a;
+                color: white;
+                text-align: left;
+                padding: 12px;
+            }
+            td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+                vertical-align: top;
+            }
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            .output-cell {
+                white-space: pre-wrap;
+            }
+            .score {
+                font-weight: bold;
+                padding: 5px 10px;
+                border-radius: 3px;
+                display: inline-block;
+            }
+            .score-high {
+                background-color: #c8e6c9;
+                color: #2e7d32;
+            }
+            .score-medium {
+                background-color: #fff9c4;
+                color: #f57f17;
+            }
+            .score-low {
+                background-color: #ffcdd2;
+                color: #c62828;
+            }
+            .output {
+                overflow: auto;
+                white-space: pre-wrap;
+            }
+
+            .output pre {
+                background-color: #f5f5f5;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                padding: 10px;
+                margin: 0;
+                font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+                font-size: 14px;
+                line-height: 1.4;
+                color: #333;
+                box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+                overflow-x: auto;
+                white-space: pre-wrap; 
+                word-wrap: break-word; 
+            }
+
+            td {
+                width: 20%;
+            }
+            .score-col {
+                width: 80px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Prompt Evaluation Report</h1>
+            <div class="summary-stats">
+                <div class="stat-box">
+                    <div>Total Test Cases</div>
+                    <div class="stat-value">5</div>
+                </div>
+                <div class="stat-box">
+                    <div>Average Score</div>
+                    <div class="stat-value">7.2 / 10</div>
+                </div>
+                <div class="stat-box">
+                    <div>Pass Rate (≥7)</div>
+                    <div class="stat-value">80.0%</div>
+                </div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Prompt Inputs</th>
+                    <th>Solution Criteria</th>
+                    <th>Output</th>
+                    <th>Score</th>
+                    <th>Reasoning</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            <tr>
+                <td>Testing with a dense abstract from a social sciences article containing implicit and explicit topics to assess topic extraction comprehensiveness</td>
+                <td class="prompt-inputs"><strong>content:</strong> This study examines the intersection of socioeconomic inequality and educational attainment in post-industrial urban communities. Using longitudinal data from 2,500 households across five metropolitan areas, we investigate how neighborhood gentrification patterns correlate with school funding disparities and student outcomes. Our findings reveal that residential segregation mechanisms perpetuate intergenerational poverty cycles, with particular emphasis on how institutional policies in housing and education reinforce systemic inequalities. We employ multilevel regression analysis to disentangle the effects of family income, parental education, school resources, and peer composition on academic achievement gaps. The results suggest that policy interventions targeting affordable housing stability and equitable school financing may provide more substantial improvements in educational equity than individual-level interventions alone.</td>
+                <td class="criteria">• Extracts both explicit topics (socioeconomic inequality, educational attainment, gentrification, school funding) and implicit topics (residential segregation, intergenerational poverty, systemic inequalities, educational equity)<br>• Output is a valid JSON array of strings with no duplicates<br>• Includes methodological topics (longitudinal data, multilevel regression analysis) relevant to the scholarly context</td>
+                <td class="output"><pre>```json
+[
+    "socioeconomic inequality",
+    "educational attainment",
+    "urban communities",
+    "neighborhood gentrification",
+    "school funding",
+    "residential segregation",
+    "intergenerational poverty",
+    "institutional policies",
+    "housing policy",
+    "education policy",
+    "academic achievement",
+    "educational equity",
+    "peer composition",
+    "parental education",
+    "systemic inequalities"
+]
+```</pre></td>
+                <td class="score-col"><span class="score score-medium">7</span></td>
+                <td class="reasoning">The solution meets all mandatory requirements: it is a valid JSON array of strings with no duplicates, contains only topic strings without commentary, and includes nothing else. It successfully extracts explicit and implicit topics from the passage. However, it falls short on the secondary criteria by not including methodological topics (longitudinal data, multilevel regression analysis) that are explicitly mentioned and relevant to the scholarly context. The criteria specifically state that methodological topics should be included as they are relevant to the scholarly context. This is a notable omission that prevents a higher score.</td>
+            </tr>
+        
+            <tr>
+                <td>Testing with a short passage (2-3 sentences) containing minimal topics to verify the prompt handles sparse content without over-extraction</td>
+                <td class="prompt-inputs"><strong>content:</strong> This study examines the relationship between circadian rhythm disruption and metabolic dysfunction in shift workers. We conducted a longitudinal analysis of 150 participants over 12 months, measuring cortisol levels and glucose tolerance at regular intervals.</td>
+                <td class="criteria">• Extracts exactly the main topics present without adding inferred or related topics<br>• Returns results as a JSON array of strings<br>• Avoids over-extraction from this sparse, focused passage</td>
+                <td class="output"><pre>```json
+[
+    "circadian rhythm",
+    "metabolic dysfunction",
+    "shift work",
+    "cortisol levels",
+    "glucose tolerance",
+    "longitudinal study",
+    "occupational health"
+]
+```</pre></td>
+                <td class="score-col"><span class="score score-medium">7</span></td>
+                <td class="reasoning">The solution meets all mandatory requirements: it returns a valid JSON array of strings containing topics from the article with no extra commentary. However, it violates the secondary criterion of 'Extracts exactly the main topics present without adding inferred or related topics.' The passage explicitly mentions circadian rhythm disruption, metabolic dysfunction, shift workers, cortisol levels, and glucose tolerance. 'Occupational health' is an inferred broader category not stated in the text, and 'longitudinal study' is a methodological descriptor rather than a research topic. The solution should contain only the 5 explicitly mentioned topics to fully satisfy the criteria.</td>
+            </tr>
+        
+            <tr>
+                <td>Testing with a passage containing overlapping and nested topics to verify accurate topic distinction and avoiding duplication</td>
+                <td class="prompt-inputs"><strong>content:</strong> This study examines the intersection of machine learning and natural language processing in biomedical text mining. We investigate how deep learning architectures, particularly transformer-based models and recurrent neural networks, can be applied to extract clinical entities from electronic health records. Our approach combines named entity recognition techniques with semantic similarity measures to identify relationships between medical concepts, diseases, and treatments. The framework leverages word embeddings and contextual representations to disambiguate polysemous medical terms, which frequently appear in clinical narratives where disease symptoms overlap with treatment side effects.</td>
+                <td class="criteria">• Extracts distinct topics without duplication (e.g., 'machine learning' and 'deep learning' should be distinguished or consolidated appropriately)<br>• Identifies overlapping/nested topics (e.g., 'named entity recognition' as a technique within 'natural language processing')<br>• Returns output as a valid JSON array of strings</td>
+                <td class="output"><pre>```json
+[
+    "machine learning",
+    "natural language processing",
+    "biomedical text mining",
+    "deep learning",
+    "transformer models",
+    "recurrent neural networks",
+    "named entity recognition",
+    "electronic health records",
+    "semantic similarity",
+    "word embeddings",
+    "clinical entity extraction",
+    "medical concept disambiguation"
+]
+```</pre></td>
+                <td class="score-col"><span class="score score-medium">6</span></td>
+                <td class="reasoning">The solution meets all mandatory requirements: it provides a valid JSON array of strings containing topics from the article with no extra commentary. However, it has notable deficiencies in secondary criteria. The extraction is incomplete - several key topics mentioned in the passage are omitted (contextual representations, polysemous terms, clinical narratives, disease symptoms, treatment side effects). Additionally, while the solution distinguishes some related concepts appropriately, it doesn't fully address the criterion about identifying overlapping/nested relationships between topics. The solution captures approximately 70% of extractable topics but misses important domain-specific concepts that appear in the text.</td>
+            </tr>
+        
+            <tr>
+                <td>Testing with a passage discussing methodology, findings, and implications to ensure topics span different structural components of scholarly writing</td>
+                <td class="prompt-inputs"><strong>content:</strong> We employed a mixed-methods approach combining quantitative surveys with qualitative interviews to investigate student engagement in online learning environments. Our sample comprised 450 undergraduate students across three institutions. Results revealed that asynchronous discussion forums increased participation rates by 62% compared to synchronous sessions, with particular benefits for non-traditional students managing work-life balance. Furthermore, sentiment analysis of student feedback indicated that personalized instructor feedback and peer interaction were the strongest predictors of course completion. These findings suggest that institutional investment in discussion platform infrastructure and faculty training programs could substantially improve retention rates, particularly in STEM disciplines where dropout rates remain elevated.</td>
+                <td class="criteria">• Extracted topics must span methodology, findings, and implications sections as present in the passage<br>• Topics should be distinct and non-redundant<br>• All major topics discussed should be captured in the JSON array</td>
+                <td class="output"><pre>```json
+[
+  "online learning",
+  "student engagement",
+  "asynchronous discussion forums",
+  "undergraduate education",
+  "instructor feedback",
+  "peer interaction",
+  "course completion",
+  "student retention",
+  "STEM education",
+  "non-traditional students",
+  "mixed-methods research",
+  "sentiment analysis"
+]
+```</pre></td>
+                <td class="score-col"><span class="score score-high">8</span></td>
+                <td class="reasoning">The solution meets all mandatory requirements: it provides a valid JSON array of strings containing only topics with no extra commentary. It successfully captures topics across methodology, findings, and implications sections with distinct, non-redundant entries. However, it has minor deficiencies in comprehensiveness—several explicitly mentioned topics (quantitative surveys, qualitative interviews, work-life balance, synchronous sessions) were omitted. These are not critical omissions since the major topics are well-represented, but they represent gaps in capturing 'all major topics discussed' as specified in the secondary criteria.</td>
+            </tr>
+        
+            <tr>
+                <td>Testing with a passage mixing domain-specific jargon and general concepts to evaluate whether both specialized and broad topics are captured appropriately</td>
+                <td class="prompt-inputs"><strong>content:</strong> This study employs a mixed-methods approach combining quantitative polymerase chain reaction (PCR) analysis with qualitative phenomenological interviews to investigate epigenetic modifications in cancer cell populations. We utilized chromatin immunoprecipitation sequencing (ChIP-seq) to identify histone acetylation patterns across promoter regions, while simultaneously examining patient narratives regarding disease progression and treatment experiences. Our findings reveal significant upregulation of HDAC inhibitors correlated with improved survival outcomes, though qualitative data suggests substantial psychological burden and quality-of-life considerations that quantitative metrics alone cannot capture. These results underscore the importance of integrating molecular biology with social determinants of health in comprehensive oncological research.</td>
+                <td class="criteria">• Extracts both specialized scientific topics (PCR, ChIP-seq, histone acetylation, HDAC inhibitors) and general concepts (cancer, treatment, patient experience, quality-of-life)<br>• Identifies methodological approaches as distinct topics (mixed-methods, quantitative analysis, qualitative interviews, phenomenological)<br>• Returns output as a JSON array of strings with no duplicates<br>• Captures cross-disciplinary themes that bridge molecular biology with social/psychological domains</td>
+                <td class="output"><pre>```json
+[
+  "epigenetic modifications",
+  "cancer cell populations",
+  "polymerase chain reaction (PCR)",
+  "chromatin immunoprecipitation sequencing (ChIP-seq)",
+  "histone acetylation",
+  "HDAC inhibitors",
+  "patient narratives",
+  "disease progression",
+  "cancer treatment",
+  "survival outcomes",
+  "quality of life",
+  "social determinants of health",
+  "oncological research",
+  "mixed-methods research",
+  "molecular biology"
+]
+```</pre></td>
+                <td class="score-col"><span class="score score-high">8</span></td>
+                <td class="reasoning">The solution fully satisfies all mandatory requirements: it returns a valid JSON array of strings containing topics from the article, with clean topic names and no extra commentary. Regarding secondary criteria, it successfully extracts specialized scientific topics, general concepts, and cross-disciplinary themes. However, it has minor gaps in identifying all methodological approaches mentioned in the text—specifically missing 'phenomenological' as a distinct methodological topic and not explicitly extracting 'qualitative interviews' or 'quantitative analysis' as separate topics, despite the criteria requesting identification of methodological approaches as distinct topics. These are relatively minor omissions that don't significantly detract from an otherwise comprehensive extraction.</td>
+            </tr>
+        
+            </tbody>
+        </table>
+    </body>
+    </html>
+    

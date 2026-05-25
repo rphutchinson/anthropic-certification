@@ -1,0 +1,88 @@
+[
+  {
+    "output": "```json\n[\n    \"socioeconomic inequality\",\n    \"educational attainment\",\n    \"urban communities\",\n    \"neighborhood gentrification\",\n    \"school funding\",\n    \"residential segregation\",\n    \"intergenerational poverty\",\n    \"institutional policies\",\n    \"housing policy\",\n    \"education policy\",\n    \"academic achievement\",\n    \"educational equity\",\n    \"peer composition\",\n    \"parental education\",\n    \"systemic inequalities\"\n]\n```",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "This study examines the intersection of socioeconomic inequality and educational attainment in post-industrial urban communities. Using longitudinal data from 2,500 households across five metropolitan areas, we investigate how neighborhood gentrification patterns correlate with school funding disparities and student outcomes. Our findings reveal that residential segregation mechanisms perpetuate intergenerational poverty cycles, with particular emphasis on how institutional policies in housing and education reinforce systemic inequalities. We employ multilevel regression analysis to disentangle the effects of family income, parental education, school resources, and peer composition on academic achievement gaps. The results suggest that policy interventions targeting affordable housing stability and equitable school financing may provide more substantial improvements in educational equity than individual-level interventions alone."
+      },
+      "solution_criteria": [
+        "Extracts both explicit topics (socioeconomic inequality, educational attainment, gentrification, school funding) and implicit topics (residential segregation, intergenerational poverty, systemic inequalities, educational equity)",
+        "Output is a valid JSON array of strings with no duplicates",
+        "Includes methodological topics (longitudinal data, multilevel regression analysis) relevant to the scholarly context"
+      ],
+      "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of Strings",
+      "scenario": "Testing with a dense abstract from a social sciences article containing implicit and explicit topics to assess topic extraction comprehensiveness"
+    },
+    "score": 7,
+    "reasoning": "The solution meets all mandatory requirements: it is a valid JSON array of strings with no duplicates, contains only topic strings without commentary, and includes nothing else. It successfully extracts explicit and implicit topics from the passage. However, it falls short on the secondary criteria by not including methodological topics (longitudinal data, multilevel regression analysis) that are explicitly mentioned and relevant to the scholarly context. The criteria specifically state that methodological topics should be included as they are relevant to the scholarly context. This is a notable omission that prevents a higher score."
+  },
+  {
+    "output": "```json\n[\n    \"circadian rhythm\",\n    \"metabolic dysfunction\",\n    \"shift work\",\n    \"cortisol levels\",\n    \"glucose tolerance\",\n    \"longitudinal study\",\n    \"occupational health\"\n]\n```",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "This study examines the relationship between circadian rhythm disruption and metabolic dysfunction in shift workers. We conducted a longitudinal analysis of 150 participants over 12 months, measuring cortisol levels and glucose tolerance at regular intervals."
+      },
+      "solution_criteria": [
+        "Extracts exactly the main topics present without adding inferred or related topics",
+        "Returns results as a JSON array of strings",
+        "Avoids over-extraction from this sparse, focused passage"
+      ],
+      "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of Strings",
+      "scenario": "Testing with a short passage (2-3 sentences) containing minimal topics to verify the prompt handles sparse content without over-extraction"
+    },
+    "score": 7,
+    "reasoning": "The solution meets all mandatory requirements: it returns a valid JSON array of strings containing topics from the article with no extra commentary. However, it violates the secondary criterion of 'Extracts exactly the main topics present without adding inferred or related topics.' The passage explicitly mentions circadian rhythm disruption, metabolic dysfunction, shift workers, cortisol levels, and glucose tolerance. 'Occupational health' is an inferred broader category not stated in the text, and 'longitudinal study' is a methodological descriptor rather than a research topic. The solution should contain only the 5 explicitly mentioned topics to fully satisfy the criteria."
+  },
+  {
+    "output": "```json\n[\n    \"machine learning\",\n    \"natural language processing\",\n    \"biomedical text mining\",\n    \"deep learning\",\n    \"transformer models\",\n    \"recurrent neural networks\",\n    \"named entity recognition\",\n    \"electronic health records\",\n    \"semantic similarity\",\n    \"word embeddings\",\n    \"clinical entity extraction\",\n    \"medical concept disambiguation\"\n]\n```",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "This study examines the intersection of machine learning and natural language processing in biomedical text mining. We investigate how deep learning architectures, particularly transformer-based models and recurrent neural networks, can be applied to extract clinical entities from electronic health records. Our approach combines named entity recognition techniques with semantic similarity measures to identify relationships between medical concepts, diseases, and treatments. The framework leverages word embeddings and contextual representations to disambiguate polysemous medical terms, which frequently appear in clinical narratives where disease symptoms overlap with treatment side effects."
+      },
+      "solution_criteria": [
+        "Extracts distinct topics without duplication (e.g., 'machine learning' and 'deep learning' should be distinguished or consolidated appropriately)",
+        "Identifies overlapping/nested topics (e.g., 'named entity recognition' as a technique within 'natural language processing')",
+        "Returns output as a valid JSON array of strings"
+      ],
+      "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of Strings",
+      "scenario": "Testing with a passage containing overlapping and nested topics to verify accurate topic distinction and avoiding duplication"
+    },
+    "score": 6,
+    "reasoning": "The solution meets all mandatory requirements: it provides a valid JSON array of strings containing topics from the article with no extra commentary. However, it has notable deficiencies in secondary criteria. The extraction is incomplete - several key topics mentioned in the passage are omitted (contextual representations, polysemous terms, clinical narratives, disease symptoms, treatment side effects). Additionally, while the solution distinguishes some related concepts appropriately, it doesn't fully address the criterion about identifying overlapping/nested relationships between topics. The solution captures approximately 70% of extractable topics but misses important domain-specific concepts that appear in the text."
+  },
+  {
+    "output": "```json\n[\n  \"online learning\",\n  \"student engagement\",\n  \"asynchronous discussion forums\",\n  \"undergraduate education\",\n  \"instructor feedback\",\n  \"peer interaction\",\n  \"course completion\",\n  \"student retention\",\n  \"STEM education\",\n  \"non-traditional students\",\n  \"mixed-methods research\",\n  \"sentiment analysis\"\n]\n```",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "We employed a mixed-methods approach combining quantitative surveys with qualitative interviews to investigate student engagement in online learning environments. Our sample comprised 450 undergraduate students across three institutions. Results revealed that asynchronous discussion forums increased participation rates by 62% compared to synchronous sessions, with particular benefits for non-traditional students managing work-life balance. Furthermore, sentiment analysis of student feedback indicated that personalized instructor feedback and peer interaction were the strongest predictors of course completion. These findings suggest that institutional investment in discussion platform infrastructure and faculty training programs could substantially improve retention rates, particularly in STEM disciplines where dropout rates remain elevated."
+      },
+      "solution_criteria": [
+        "Extracted topics must span methodology, findings, and implications sections as present in the passage",
+        "Topics should be distinct and non-redundant",
+        "All major topics discussed should be captured in the JSON array"
+      ],
+      "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of Strings",
+      "scenario": "Testing with a passage discussing methodology, findings, and implications to ensure topics span different structural components of scholarly writing"
+    },
+    "score": 8,
+    "reasoning": "The solution meets all mandatory requirements: it provides a valid JSON array of strings containing only topics with no extra commentary. It successfully captures topics across methodology, findings, and implications sections with distinct, non-redundant entries. However, it has minor deficiencies in comprehensiveness\u2014several explicitly mentioned topics (quantitative surveys, qualitative interviews, work-life balance, synchronous sessions) were omitted. These are not critical omissions since the major topics are well-represented, but they represent gaps in capturing 'all major topics discussed' as specified in the secondary criteria."
+  },
+  {
+    "output": "```json\n[\n  \"epigenetic modifications\",\n  \"cancer cell populations\",\n  \"polymerase chain reaction (PCR)\",\n  \"chromatin immunoprecipitation sequencing (ChIP-seq)\",\n  \"histone acetylation\",\n  \"HDAC inhibitors\",\n  \"patient narratives\",\n  \"disease progression\",\n  \"cancer treatment\",\n  \"survival outcomes\",\n  \"quality of life\",\n  \"social determinants of health\",\n  \"oncological research\",\n  \"mixed-methods research\",\n  \"molecular biology\"\n]\n```",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "This study employs a mixed-methods approach combining quantitative polymerase chain reaction (PCR) analysis with qualitative phenomenological interviews to investigate epigenetic modifications in cancer cell populations. We utilized chromatin immunoprecipitation sequencing (ChIP-seq) to identify histone acetylation patterns across promoter regions, while simultaneously examining patient narratives regarding disease progression and treatment experiences. Our findings reveal significant upregulation of HDAC inhibitors correlated with improved survival outcomes, though qualitative data suggests substantial psychological burden and quality-of-life considerations that quantitative metrics alone cannot capture. These results underscore the importance of integrating molecular biology with social determinants of health in comprehensive oncological research."
+      },
+      "solution_criteria": [
+        "Extracts both specialized scientific topics (PCR, ChIP-seq, histone acetylation, HDAC inhibitors) and general concepts (cancer, treatment, patient experience, quality-of-life)",
+        "Identifies methodological approaches as distinct topics (mixed-methods, quantitative analysis, qualitative interviews, phenomenological)",
+        "Returns output as a JSON array of strings with no duplicates",
+        "Captures cross-disciplinary themes that bridge molecular biology with social/psychological domains"
+      ],
+      "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of Strings",
+      "scenario": "Testing with a passage mixing domain-specific jargon and general concepts to evaluate whether both specialized and broad topics are captured appropriately"
+    },
+    "score": 8,
+    "reasoning": "The solution fully satisfies all mandatory requirements: it returns a valid JSON array of strings containing topics from the article, with clean topic names and no extra commentary. Regarding secondary criteria, it successfully extracts specialized scientific topics, general concepts, and cross-disciplinary themes. However, it has minor gaps in identifying all methodological approaches mentioned in the text\u2014specifically missing 'phenomenological' as a distinct methodological topic and not explicitly extracting 'qualitative interviews' or 'quantitative analysis' as separate topics, despite the criteria requesting identification of methodological approaches as distinct topics. These are relatively minor omissions that don't significantly detract from an otherwise comprehensive extraction."
+  }
+]
